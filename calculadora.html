@@ -1,4 +1,338 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de Iluminación - Método de los Lúmenes (SEC Chile RIC N°10)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="bg-amber-500 text-slate-900 p-2 rounded-lg font-bold text-xl shadow-lg shadow-amber-500/20">
+          <i class="fa-solid fa-lightbulb"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg text-white">LumenCalc Pro (RIC N°10)</h1>
+          <p class="text-xs text-slate-400">Método de los Lúmenes - SEC Chile & CIE</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <!-- RETORNO AL PORTAL -->
+        <a href="https://merunaku.github.io/home/index.html" class="btn-home px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold text-xs rounded-md transition flex items-center space-x-1.5 shadow-md border border-slate-600">
+          <span>🏠 Volver a Página Principal</span>
+        </a>
+        <button onclick="window.print()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold text-xs rounded-md transition flex items-center space-x-1.5 shadow-md">
+          <i class="fa-solid fa-print"></i>
+          <span>Imprimir / PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <div class="bg-slate-800/80 backdrop-blur border-b border-slate-700 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-1 overflow-x-auto">
+      <button onclick="switchTab('calc')" id="tab-calc" class="tab-btn active px-4 py-3 text-sm font-medium border-b-2 border-amber-500 text-amber-400 flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-sliders"></i>
+        <span>Calculadora y Plano 2D</span>
+      </button>
+      <button onclick="switchTab('repo')" id="tab-repo" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span>Catálogo de Luminarias (18 Equipos)</span>
+      </button>
+      <button onclick="switchTab('memory')" id="tab-memory" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-square-root-variable"></i>
+        <span>Paso a Paso (14 Pasos)</span>
+      </button>
+      <button onclick="switchTab('cie')" id="tab-cie" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-table"></i>
+        <span>Tabla CIE Oficial (C<sub>u</sub>)</span>
+      </button>
+      <button onclick="switchTab('ric')" id="tab-ric" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-book"></i>
+        <span>SEC RIC N°10</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- TAB 1: CALCULADORA -->
+    <div id="content-calc" class="tab-content space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Panel Izquierdo: Inputs -->
+        <div class="lg:col-span-5 space-y-6">
+
+          <!-- 1. Dimensiones -->
+          <div class="bg-slate-800 rounded-xl p-5 border border-slate-700 shadow-xl space-y-4">
+            <h2 class="text-base font-semibold text-amber-400 flex items-center space-x-2 border-b border-slate-700 pb-2">
+              <i class="fa-solid fa-ruler-combined"></i>
+              <span>1. Dimensiones del Local</span>
+            </h2>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Ancho (a) [m]</label>
+                <input type="number" id="input-a" value="8" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Largo (b) [m]</label>
+                <input type="number" id="input-b" value="17" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Alto Total (H) [m]</label>
+                <input type="number" id="input-H" value="3" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Plano Trabajo (h') [m]</label>
+                <input type="number" id="input-h_prime" value="0.8" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Suspensión (d') [m]</label>
+                <input type="number" id="input-d_prime" value="0" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Iluminancia Deseada (E<sub>m</sub>) [lux]</label>
+              <div class="flex space-x-2">
+                <input type="number" id="input-Em" value="750" step="50" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-amber-400 font-bold font-mono-code"/>
+                <button onclick="switchTab('ric')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-2 rounded-lg text-slate-300 transition whitespace-nowrap">
+                  Buscar en RIC N°10
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Colores y Reflexión -->
+          <div class="bg-slate-800 rounded-xl p-5 border border-slate-700 shadow-xl space-y-4">
+            <h2 class="text-base font-semibold text-amber-400 flex items-center space-x-2 border-b border-slate-700 pb-2">
+              <i class="fa-solid fa-palette"></i>
+              <span>2. Colores y Coeficientes de Reflexión</span>
+            </h2>
+
+            <!-- Techo -->
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Color del Techo</label>
+              <div class="flex items-center space-x-2">
+                <div id="swatch-techo" class="w-7 h-7 rounded border border-slate-600 shadow-inner flex-shrink-0" style="background-color: #ffffff;"></div>
+                <select id="select-techo" onchange="onColorChange()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+                  <option value="0.80">Blanco Puro / Nieve (80% / 0.80)</option>
+                  <option value="0.70" selected>Blanco Estándar / Muy Claro (70% / 0.70)</option>
+                  <option value="0.50">Claro / Crema / Amarillo Claro (50% / 0.50)</option>
+                  <option value="0.30">Medio / Gris Claro / Madera Clara (30% / 0.30)</option>
+                  <option value="0.00">Oscuro / Negro / Hormigón Oscuro (0% / 0.00)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Paredes -->
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Color de las Paredes</label>
+              <div class="flex items-center space-x-2">
+                <div id="swatch-pared" class="w-7 h-7 rounded border border-slate-600 shadow-inner flex-shrink-0" style="background-color: #f3f4f6;"></div>
+                <select id="select-pared" onchange="onColorChange()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+                  <option value="0.50" selected>Blanco / Claro / Marfil (50% / 0.50)</option>
+                  <option value="0.30">Medio / Gris / Amarillo / Pastel (30% / 0.30)</option>
+                  <option value="0.10">Oscuro / Rojo / Azul Oscuro / Ladrillo (10% / 0.10)</option>
+                  <option value="0.00">Muy Oscuro / Negro (0% / 0.00)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Suelo -->
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Color del Suelo</label>
+              <div class="flex items-center space-x-2">
+                <div id="swatch-suelo" class="w-7 h-7 rounded border border-slate-600 shadow-inner flex-shrink-0" style="background-color: #9ca3af;"></div>
+                <select id="select-suelo" onchange="onColorChange()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+                  <option value="0.30">Claro / Baldosa Clara / Parquet Claro (30% / 0.30)</option>
+                  <option value="0.20" selected>Estándar / Hormigón / Gris Claro (20% / 0.20)</option>
+                  <option value="0.10">Oscuro / Asfalto / Piso Oscuro (10% / 0.10)</option>
+                  <option value="0.00">Muy Oscuro / Negro (0% / 0.00)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Luminaria y Equipo -->
+          <div class="bg-slate-800 rounded-xl p-5 border border-slate-700 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+              <h2 class="text-base font-semibold text-amber-400 flex items-center space-x-2">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>3. Luminaria y Equipo</span>
+              </h2>
+              <button onclick="switchTab('repo')" class="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/40 px-2 py-1 rounded transition">
+                Ver Catálogo
+              </button>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Modelo Seleccionado</label>
+              <input type="text" id="input-lum-name" value="Luminaria T8 LED Apantallada 35°" readonly class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-amber-300 font-medium"/>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Flujo por Lámpara (Φ<sub>L</sub>) [lm]</label>
+                <input type="number" id="input-phi_L" value="10000" step="500" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Lámparas/Luminaria (n)</label>
+                <input type="number" id="input-n_lamps" value="1" min="1" step="1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Sistema de Alumbrado</label>
+                <select id="input-system" onchange="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+                  <option value="direct" selected>Directo / Semidirecto</option>
+                  <option value="indirect">Indirecto / Semi-indirecto</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Mantenimiento (C<sub>m</sub>)</label>
+                <select id="input-Cm" onchange="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white font-mono-code">
+                  <option value="0.8" selected>0.8 - Limpio / Mantenimiento Bueno</option>
+                  <option value="0.6">0.6 - Sucio / Polvoriento</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Criterio de Redondeo en Rejilla -->
+            <div class="grid grid-cols-2 gap-3 pt-2 border-t border-slate-700/60">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Redondeo N<sub>ancho</sub></label>
+                <select id="select-round-ancho" onchange="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-amber-300 font-mono-code">
+                  <option value="ceil" selected>⌈ ⌉ Hacia Arriba (Ceil)</option>
+                  <option value="floor">⌊ ⌋ Hacia Abajo (Floor)</option>
+                  <option value="round">[ ] Al más cercano (Round)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Redondeo N<sub>largo</sub></label>
+                <select id="select-round-largo" onchange="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-amber-300 font-mono-code">
+                  <option value="ceil" selected>⌈ ⌉ Hacia Arriba (Ceil)</option>
+                  <option value="floor">⌊ ⌋ Hacia Abajo (Floor)</option>
+                  <option value="round">[ ] Al más cercano (Round)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Panel Derecho: Resultados y Canvas -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <!-- Cards Resumen -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-md">
+              <span class="text-xs text-slate-400 block font-medium">Índice Local (K)</span>
+              <span id="res-K" class="text-xl font-bold text-amber-400 font-mono-code">2.473</span>
+            </div>
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-md">
+              <span class="text-xs text-slate-400 block font-medium">Coef. Utilización (C<sub>u</sub>)</span>
+              <span id="res-Cu" class="text-xl font-bold text-amber-400 font-mono-code">0.777</span>
+            </div>
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-md">
+              <span class="text-xs text-slate-400 block font-medium">Luminarias Totales</span>
+              <span id="res-Ntotal" class="text-xl font-bold text-emerald-400 font-mono-code">21</span>
+              <span id="res-grid-desc" class="text-[10px] text-slate-400 block mt-0.5">(3 Ancho × 7 Largo)</span>
+            </div>
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-md">
+              <span class="text-xs text-slate-400 block font-medium">E<sub>m</sub> Calculada</span>
+              <span id="res-Em-calc" class="text-xl font-bold text-emerald-400 font-mono-code">959.824 lux</span>
+              <span class="text-[10px] text-slate-400 block mt-0.5">(Requerido: 750 lux)</span>
+            </div>
+          </div>
+
+          <!-- Canvas 2D -->
+          <div class="bg-slate-800 rounded-xl p-5 border border-slate-700 shadow-xl space-y-3">
+            <div class="flex items-center justify-between">
+              <h2 class="text-base font-semibold text-amber-400 flex items-center space-x-2">
+                <i class="fa-solid fa-border-all"></i>
+                <span>Distribución Espacial en Planta (Vista 2D)</span>
+              </h2>
+              <span id="badge-spacing" class="text-xs px-2.5 py-1 rounded-full font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                <i class="fa-solid fa-check-circle mr-1"></i> Distancias Correctas
+              </span>
+            </div>
+
+            <div class="relative bg-slate-950 rounded-lg p-3 border border-slate-800 flex items-center justify-center overflow-hidden min-h-[320px]">
+              <canvas id="canvas2d" width="600" height="350" class="max-w-full h-auto"></canvas>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2 border-t border-slate-700/60 pt-3">
+              <div><span class="inline-block w-3 h-3 bg-amber-400 rounded-full mr-1"></span> Centro de Luminaria</div>
+              <div>Separación Ancho: <strong id="res-dancho" class="text-white font-mono-code">2.667 m</strong></div>
+              <div>Separación Largo: <strong id="res-dlargo" class="text-white font-mono-code">2.429 m</strong></div>
+              <div>Distancia Máx. Permitida: <strong id="res-dmax" class="text-white font-mono-code">3.52 m</strong></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 2: REPOSITORIO DE LUMINARIAS -->
+    <div id="content-repo" class="tab-content hidden space-y-6">
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-700 pb-4">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <i class="fa-solid fa-boxes-stacked text-amber-400"></i>
+              <span>Catálogo Comercial de Equipos LED</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">Seleccione un equipo comercial real para cargar sus parámetros automáticamente en el cálculo.</p>
+          </div>
+          <input type="text" id="repo-search" oninput="renderRepoCards()" placeholder="Buscar equipo..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 w-full sm:w-64"/>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="repo-cards-container">
+          <!-- Cargado dinámicamente -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: PASO A PASO (14 PASOS) -->
+    <div id="content-memory" class="tab-content hidden space-y-6">
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl space-y-6">
+        <div class="border-b border-slate-700 pb-4">
+          <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+            <i class="fa-solid fa-calculator text-amber-400"></i>
+            <span>Memoria de Cálculo Educativa (14 Pasos Sistemáticos)</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">Desglose pedagógico: Fórmula Base, Reemplazo de Valores y Resultado exacto.</p>
+        </div>
+
+        <div id="memory-steps-container" class="space-y-4">
+          <!-- Generado dinámicamente -->
+        </div>
+      </div>
+    </div>
+
     <!-- TAB 4: TABLA CIE -->
     <div id="content-cie" class="tab-content hidden space-y-6">
       <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl space-y-4">
@@ -19,13 +353,62 @@
     </div>
 
     <!-- TAB 5: SEC RIC N°10 -->
-<!-- ... existing code ... -->
+    <div id="content-ric" class="tab-content hidden space-y-6">
+      <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-700 pb-4">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <i class="fa-solid fa-book text-amber-400"></i>
+              <span>Pliego Técnico Normativo RIC N°10 (SEC Chile)</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">Exigencias mínimas de iluminancia media (E<sub>m</sub> en lux) según recinto y uso.</p>
+          </div>
+          <input type="text" id="ric-search" oninput="renderRicTable()" placeholder="Buscar área..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 w-full sm:w-64"/>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-slate-900 text-amber-400 font-semibold border-b border-slate-700">
+              <tr>
+                <th class="p-3">Recinto / Área de Trabajo</th>
+                <th class="p-3 text-center">E<sub>m</sub> Mínimo [lux]</th>
+                <th class="p-3">Exigencias Visuales e Indicaciones</th>
+                <th class="p-3 text-center">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="ric-table-body" class="divide-y divide-slate-700/60">
+              <!-- Cargado dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer / RETORNO AL PORTAL -->
+  <footer class="bg-slate-800 border-t border-slate-700 py-6 text-center no-print mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center space-y-3">
+      <!-- RETORNO AL PORTAL -->
+      <a href="https://merunaku.github.io/home/index.html" class="btn-home px-4 py-2 bg-slate-700 hover:bg-amber-500 hover:text-slate-900 text-slate-200 font-semibold text-xs rounded-lg transition border border-slate-600 inline-flex items-center space-x-2">
+        <span>🏠 Volver a Página Principal</span>
+      </a>
+      <p class="text-xs text-slate-500">LumenCalc Pro &copy; 2026 - Herramienta de Ingeniería Eléctrica</p>
+    </div>
+  </footer>
+
   <script>
+    // Helper de redondeo a 3 decimales para evitar problemas de precisión flotante
+    function round3(num) {
+      if (num === null || num === undefined || isNaN(num)) return 0;
+      return Math.round((num + Number.EPSILON) * 1000) / 1000;
+    }
+
     // Formateador dinámico: solo muestra decimales cuando sea necesario (máximo 3)
     function formatNumber(num) {
       if (num === null || num === undefined || isNaN(num)) return '0';
       if (Number.isInteger(num)) return num.toString();
-      const rounded = Math.round(num * 1000) / 1000;
+      const rounded = round3(num);
       if (Number.isInteger(rounded)) return rounded.toString();
       return rounded.toString();
     }
@@ -192,11 +575,15 @@
       const system = document.getElementById('input-system')?.value || 'direct';
       const Cm = getNumVal('input-Cm', 0.8);
 
-      const d = H - h_prime;
-      const h = H - h_prime - d_prime;
-      const S = a * b;
+      const roundAnchoMode = document.getElementById('select-round-ancho')?.value || 'ceil';
+      const roundLargoMode = document.getElementById('select-round-largo')?.value || 'ceil';
 
-      let K = (system === 'direct') ? (a * b) / (h * (a + b)) : (3 * a * b) / (2 * h * (a + b));
+      const d = round3(H - h_prime);
+      const h = round3(H - h_prime - d_prime);
+      const S = round3(a * b);
+
+      let K_calc = (system === 'direct') ? (a * b) / (h * (a + b)) : (3 * a * b) / (2 * h * (a + b));
+      let K = round3(K_calc);
 
       // Mapeo dinámico e inalcanzablemente preciso a las 11 columnas de la tabla CIE
       const colIdx = findBestCieColumnIndex(pTecho, pPared, pSuelo);
@@ -218,34 +605,41 @@
       const cu1 = cieColumns[colIdx].values[k1_idx];
       const cu2 = cieColumns[colIdx].values[k2_idx];
 
-      const m_slope = (cu2 - cu1) / (k2 - k1);
-      const b_inter = cu2 - (m_slope * k2);
-      const Cu = (m_slope * K) + b_inter;
+      const m_slope = round3((cu2 - cu1) / (k2 - k1));
+      const b_inter = round3(cu2 - (m_slope * k2));
+      const Cu = round3((m_slope * K) + b_inter);
 
-      const phi_T = (Em * S) / (Cu * Cm);
-      const N_exacto = phi_T / (n_lamps * phi_L);
+      const phi_T = round3((Em * S) / (Cu * Cm));
+      const N_exacto = round3(phi_T / (n_lamps * phi_L));
       const N_redondeado = Math.ceil(N_exacto);
 
-      const N_ancho_exact = Math.sqrt((N_redondeado * a) / b);
-      const N_ancho = Math.ceil(N_ancho_exact);
+      const N_ancho_exact = round3(Math.sqrt((N_redondeado * a) / b));
+      let N_ancho = Math.ceil(N_ancho_exact);
+      if (roundAnchoMode === 'floor') N_ancho = Math.floor(N_ancho_exact);
+      else if (roundAnchoMode === 'round') N_ancho = Math.round(N_ancho_exact);
+      if (N_ancho < 1) N_ancho = 1;
 
-      const N_largo_exact = N_ancho_exact * (b / a);
-      const N_largo = Math.ceil(N_largo_exact);
+      const N_largo_exact = round3(N_ancho_exact * (b / a));
+      let N_largo = Math.ceil(N_largo_exact);
+      if (roundLargoMode === 'floor') N_largo = Math.floor(N_largo_exact);
+      else if (roundLargoMode === 'round') N_largo = Math.round(N_largo_exact);
+      if (N_largo < 1) N_largo = 1;
 
       const N_total_grid = N_ancho * N_largo;
 
-      const d_ancho = a / N_ancho;
-      const d_largo = b / N_largo;
+      const d_ancho = round3(a / N_ancho);
+      const d_largo = round3(b / N_largo);
 
-      const d_max_permitida = 1.6 * h;
+      const d_max_permitida = round3(1.6 * h);
       const spacing_ok = (d_ancho <= d_max_permitida) && (d_largo <= d_max_permitida);
 
-      const Em_calculado = (n_lamps * N_total_grid * phi_L * Cu * Cm) / S;
+      const Em_calculado = round3((n_lamps * N_total_grid * phi_L * Cu * Cm) / S);
 
       state = {
         a, b, H, h_prime, d_prime, d, h, S, Em,
         pTecho, pPared, pSuelo, colIdx,
         phi_L, n_lamps, system, Cm,
+        roundAnchoMode, roundLargoMode,
         K, k1, k2, cu1, cu2, m_slope, b_inter, Cu,
         phi_T, N_exacto, N_redondeado,
         N_ancho_exact, N_ancho, N_largo_exact, N_largo, N_total_grid,
@@ -291,6 +685,8 @@
       if (!container) return;
 
       const lumName = document.getElementById('input-lum-name')?.value || 'Luminaria Seleccionada';
+      const denomPhiT = round3(c.Cu * c.Cm);
+      const numEmReal = round3(c.N_total_grid * c.n_lamps * c.phi_L * c.Cu * c.Cm);
 
       const steps = [
         {
@@ -340,9 +736,9 @@
           title: "Determinar la altura de suspensión de las luminarias",
           desc: "Límites recomendados de montaje según el sistema escogido.",
           formula: "h<sub>mín</sub> = (2/3) × h  |  h<sub>ópt</sub> = (4/5) × h",
-          replacement: `h<sub>mín</sub> = (2 / 3) × ${formatNumber(c.h)} = ${formatNumber(2/3*c.h)} m<br/>` +
-                       `h<sub>ópt</sub> = (4 / 5) × ${formatNumber(c.h)} = ${formatNumber(4/5*c.h)} m`,
-          result: `h<sub>ópt</sub> = ${formatNumber(4/5*c.h)} m`
+          replacement: `h<sub>mín</sub> = (2 / 3) × ${formatNumber(c.h)} = ${formatNumber(round3(2/3*c.h))} m<br/>` +
+                       `h<sub>ópt</sub> = (4 / 5) × ${formatNumber(c.h)} = ${formatNumber(round3(4/5*c.h))} m`,
+          result: `h<sub>ópt</sub> = ${formatNumber(round3(4/5*c.h))} m`
         },
         {
           num: 7,
@@ -350,7 +746,7 @@
           desc: "Relación geométrica proporcional entre área y altura útil.",
           formula: c.system === 'direct' ? "K = (a × b) / [ h × (a + b) ]" : "K = (3 × a × b) / [ 2 × h × (a + b) ]",
           replacement: c.system === 'direct' ?
-                       `K = (${formatNumber(c.a)} × ${formatNumber(c.b)}) / [ ${formatNumber(c.h)} × (${formatNumber(c.a)} + ${formatNumber(c.b)}) ] = ${formatNumber(c.S)} / ${formatNumber(c.h*(c.a+c.b))}` :
+                       `K = (${formatNumber(c.a)} × ${formatNumber(c.b)}) / [ ${formatNumber(c.h)} × (${formatNumber(c.a)} + ${formatNumber(c.b)}) ] = ${formatNumber(c.S)} / ${formatNumber(round3(c.h*(c.a+c.b)))}` :
                        `K = (3 × ${formatNumber(c.a)} × ${formatNumber(c.b)}) / [ 2 × ${formatNumber(c.h)} × (${formatNumber(c.a)} + ${formatNumber(c.b)}) ]`,
           result: `K = ${formatNumber(c.K)}`
         },
@@ -388,7 +784,7 @@
           title: "Cálculo del flujo luminoso total requerido (Φ<sub>T</sub>)",
           desc: "Flujo luminoso total que deben suministrar todas las luminarias.",
           formula: "Φ<sub>T</sub> = (E<sub>m</sub> × S) / (C<sub>u</sub> × C<sub>m</sub>)",
-          replacement: `Φ<sub>T</sub> = (${formatNumber(c.Em)} × ${formatNumber(c.S)}) / (${formatNumber(c.Cu)} × ${formatNumber(c.Cm)}) = ${formatNumber(c.Em*c.S)} / ${formatNumber(c.Cu*c.Cm)}`,
+          replacement: `Φ<sub>T</sub> = (${formatNumber(c.Em)} × ${formatNumber(c.S)}) / (${formatNumber(c.Cu)} × ${formatNumber(c.Cm)}) = ${formatNumber(round3(c.Em * c.S))} / ${formatNumber(denomPhiT)}`,
           result: `Φ<sub>T</sub> = ${formatNumber(c.phi_T)} lm`
         },
         {
@@ -403,11 +799,11 @@
           num: 13,
           title: "Proyectar la ubicación y grilla de luminarias en planta",
           desc: "Distribución rectangular simétrica y verificación de distancia máxima.",
-          formula: "N<sub>ancho</sub> = ⌈ √[ (N × a) / b ] ⌉<br/>" +
-                   "N<sub>largo</sub> = ⌈ N<sub>ancho</sub> × (b / a) ⌉<br/>" +
+          formula: "N<sub>ancho</sub> = " + (c.roundAnchoMode === 'floor' ? '⌊ √[ (N × a) / b ] ⌋' : (c.roundAnchoMode === 'round' ? '[ √[ (N × a) / b ] ]' : '⌈ √[ (N × a) / b ] ⌉')) + "<br/>" +
+                   "N<sub>largo</sub> = " + (c.roundLargoMode === 'floor' ? '⌊ N<sub>ancho</sub> × (b / a) ⌋' : (c.roundLargoMode === 'round' ? '[ N<sub>ancho</sub> × (b / a) ]' : '⌈ N<sub>ancho</sub> × (b / a) ⌉')) + "<br/>" +
                    "d<sub>máx</sub> = 1.6 × h",
-          replacement: `N<sub>ancho</sub> = ⌈ √[ (${formatNumber(c.N_redondeado)} × ${formatNumber(c.a)}) / ${formatNumber(c.b)} ] ⌉ = ⌈ ${formatNumber(c.N_ancho_exact)} ⌉ = ${formatNumber(c.N_ancho)}<br/>` +
-                       `N<sub>largo</sub> = ⌈ ${formatNumber(c.N_ancho_exact)} × (${formatNumber(c.b)} / ${formatNumber(c.a)}) ⌉ = ⌈ ${formatNumber(c.N_largo_exact)} ⌉ = ${formatNumber(c.N_largo)}<br/>` +
+          replacement: `N<sub>ancho</sub> = ${c.roundAnchoMode === 'floor' ? '⌊' : (c.roundAnchoMode === 'round' ? '[' : '⌈')} √[ (${formatNumber(c.N_redondeado)} × ${formatNumber(c.a)}) / ${formatNumber(c.b)} ] ${c.roundAnchoMode === 'floor' ? '⌋' : (c.roundAnchoMode === 'round' ? ']' : '⌉')} = ${c.roundAnchoMode === 'floor' ? '⌊' : (c.roundAnchoMode === 'round' ? '[' : '⌈')} ${formatNumber(c.N_ancho_exact)} ${c.roundAnchoMode === 'floor' ? '⌋' : (c.roundAnchoMode === 'round' ? ']' : '⌉')} = ${formatNumber(c.N_ancho)}<br/>` +
+                       `N<sub>largo</sub> = ${c.roundLargoMode === 'floor' ? '⌊' : (c.roundLargoMode === 'round' ? '[' : '⌈')} ${formatNumber(c.N_ancho_exact)} × (${formatNumber(c.b)} / ${formatNumber(c.a)}) ${c.roundLargoMode === 'floor' ? '⌋' : (c.roundLargoMode === 'round' ? ']' : '⌉')} = ${c.roundLargoMode === 'floor' ? '⌊' : (c.roundLargoMode === 'round' ? '[' : '⌈')} ${formatNumber(c.N_largo_exact)} ${c.roundLargoMode === 'floor' ? '⌋' : (c.roundLargoMode === 'round' ? ']' : '⌉')} = ${formatNumber(c.N_largo)}<br/>` +
                        `Separación Ancho (d<sub>ancho</sub>) = ${formatNumber(c.a)} / ${formatNumber(c.N_ancho)} = ${formatNumber(c.d_ancho)} m<br/>` +
                        `Separación Largo (d<sub>largo</sub>) = ${formatNumber(c.b)} / ${formatNumber(c.N_largo)} = ${formatNumber(c.d_largo)} m<br/>` +
                        `Distancia Máxima (d<sub>máx</sub>) = 1.6 × ${formatNumber(c.h)} = ${formatNumber(c.d_max_permitida)} m`,
@@ -419,7 +815,7 @@
           desc: "Verificación del cumplimiento de la iluminancia exigida.",
           formula: "E<sub>m_real</sub> = (N<sub>total</sub> × n × Φ<sub>L</sub> × C<sub>u</sub> × C<sub>m</sub>) / S ≥ E<sub>m_requerido</sub>",
           replacement: `E<sub>m_real</sub> = (${formatNumber(c.N_total_grid)} × ${formatNumber(c.n_lamps)} × ${formatNumber(c.phi_L)} × ${formatNumber(c.Cu)} × ${formatNumber(c.Cm)}) / ${formatNumber(c.S)}<br/>` +
-                       `E<sub>m_real</sub> = ${formatNumber(c.N_total_grid * c.n_lamps * c.phi_L * c.Cu * c.Cm)} / ${formatNumber(c.S)}`,
+                       `E<sub>m_real</sub> = ${formatNumber(numEmReal)} / ${formatNumber(c.S)}`,
           result: `E<sub>m_real</sub> = ${formatNumber(c.Em_calculado)} lux (${c.Em_calculado >= c.Em ? 'CUMPLE' : 'NO CUMPLE'})`
         }
       ];
