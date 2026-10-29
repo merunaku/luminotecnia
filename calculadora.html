@@ -26,7 +26,7 @@
           <i class="fa-solid fa-lightbulb"></i>
         </div>
         <div>
-          <h1 class="font-bold text-lg text-white">LumenCalc Pro (RIC N°10)</h1>
+          <h1 class="font-bold text-lg text-white">LumenCalc RIC N°10</h1>
           <p class="text-xs text-slate-400">Método de los Lúmenes - SEC Chile & CIE</p>
         </div>
       </div>
@@ -48,7 +48,7 @@
       </button>
       <button onclick="switchTab('repo')" id="tab-repo" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
         <i class="fa-solid fa-boxes-stacked"></i>
-        <span>Catálogo de Luminarias (18 Equipos)</span>
+        <span>Repositorio de Luminarias</span>
       </button>
       <button onclick="switchTab('memory')" id="tab-memory" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
         <i class="fa-solid fa-square-root-variable"></i>
@@ -56,7 +56,7 @@
       </button>
       <button onclick="switchTab('cie')" id="tab-cie" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
         <i class="fa-solid fa-table"></i>
-        <span>Tabla CIE Oficial (C<sub>u</sub>)</span>
+        <span>Tabla CIE (C<sub>u</sub>)</span>
       </button>
       <button onclick="switchTab('ric')" id="tab-ric" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
         <i class="fa-solid fa-book"></i>
@@ -85,26 +85,26 @@
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Ancho (a) [m]</label>
-                <input type="number" id="input-a" value="8" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+                <input type="number" id="input-a" value="8.000" step="0.100" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
               </div>
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Largo (b) [m]</label>
-                <input type="number" id="input-b" value="17" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+                <input type="number" id="input-b" value="17.000" step="0.100" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
               </div>
             </div>
 
             <div class="grid grid-cols-3 gap-3">
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Alto Total (H) [m]</label>
-                <input type="number" id="input-H" value="3" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+                <input type="number" id="input-H" value="3.000" step="0.100" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
               </div>
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Plano Trabajo (h') [m]</label>
-                <input type="number" id="input-h_prime" value="0.8" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+                <input type="number" id="input-h_prime" value="0.800" step="0.100" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
               </div>
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Suspensión (d') [m]</label>
-                <input type="number" id="input-d_prime" value="0" step="0.1" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+                <input type="number" id="input-d_prime" value="0.000" step="0.100" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
               </div>
             </div>
 
@@ -190,7 +190,7 @@
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Flujo por Lámpara (Φ<sub>L</sub>) [lm]</label>
-                <input type="number" id="input-phi_L" value="10000" step="500" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
+                <input type="number" id="input-phi_L" value="10000.000" step="500.000" oninput="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono-code"/>
               </div>
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Lámparas/Luminaria (n)</label>
@@ -209,8 +209,8 @@
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Mantenimiento (C<sub>m</sub>)</label>
                 <select id="input-Cm" onchange="recalculate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white font-mono-code">
-                  <option value="0.8" selected>0.8 - Limpio / Mantenimiento Bueno</option>
-                  <option value="0.6">0.6 - Sucio / Polvoriento</option>
+                  <option value="0.800" selected>0.800 - Limpio / Mantenimiento Bueno</option>
+                  <option value="0.600">0.600 - Sucio / Polvoriento</option>
                 </select>
               </div>
             </div>
@@ -263,7 +263,7 @@
               <div><span class="inline-block w-3 h-3 bg-amber-400 rounded-full mr-1"></span> Centro de Luminaria</div>
               <div>Separación Ancho: <strong id="res-dancho" class="text-white font-mono-code">2.667 m</strong></div>
               <div>Separación Largo: <strong id="res-dlargo" class="text-white font-mono-code">2.429 m</strong></div>
-              <div>Distancia Máx. Permitida: <strong id="res-dmax" class="text-white font-mono-code">3.52 m</strong></div>
+              <div>Distancia Máx. Permitida: <strong id="res-dmax" class="text-white font-mono-code">3.520 m</strong></div>
             </div>
           </div>
 
@@ -272,18 +272,18 @@
       </div>
     </div>
 
-    <!-- TAB 2: REPOSITORIO DE LUMINARIAS -->
+    <!-- TAB 2: REPOSICIORIO DE LUMINARIAS -->
     <div id="content-repo" class="tab-content hidden space-y-6">
       <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-700 pb-4">
           <div>
             <h2 class="text-xl font-bold text-white flex items-center space-x-2">
               <i class="fa-solid fa-boxes-stacked text-amber-400"></i>
-              <span>Catálogo Comercial de Equipos LED</span>
+              <span>Catálogo de Luminarias y Equipos LED</span>
             </h2>
-            <p class="text-xs text-slate-400 mt-1">Seleccione un equipo comercial real para cargar sus parámetros automáticamente en el cálculo.</p>
+            <p class="text-xs text-slate-400 mt-1">Seleccione un equipo técnico para cargar sus especificaciones en el cálculo automáticamente.</p>
           </div>
-          <input type="text" id="repo-search" oninput="renderRepoCards()" placeholder="Buscar equipo..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 w-full sm:w-64"/>
+          <input type="text" id="repo-search" oninput="filterRepoTable()" placeholder="Buscar luminaria por tipo o uso..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 w-full sm:w-64"/>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="repo-cards-container">
@@ -295,12 +295,14 @@
     <!-- TAB 3: PASO A PASO (14 PASOS) -->
     <div id="content-memory" class="tab-content hidden space-y-6">
       <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-xl space-y-6">
-        <div class="border-b border-slate-700 pb-4">
-          <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-            <i class="fa-solid fa-calculator text-amber-400"></i>
-            <span>Memoria de Cálculo Educativa (14 Pasos Sistemáticos)</span>
-          </h2>
-          <p class="text-xs text-slate-400 mt-1">Desglose pedagógico: Fórmula Base, Reemplazo de Valores y Resultado exacto.</p>
+        <div class="border-b border-slate-700 pb-4 flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <i class="fa-solid fa-calculator text-amber-400"></i>
+              <span>Memoria de Cálculo Educativa (14 Pasos Sistemáticos)</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">Desglose pedagógico detallado: Fórmula Base, Reemplazo de Valores y Resultado a 3 decimales.</p>
+          </div>
         </div>
 
         <div id="memory-steps-container" class="space-y-4">
@@ -315,9 +317,9 @@
         <div class="border-b border-slate-700 pb-4">
           <h2 class="text-xl font-bold text-white flex items-center space-x-2">
             <i class="fa-solid fa-table text-amber-400"></i>
-            <span>Matriz Oficial CIE de Coeficientes de Utilización (C<sub>u</sub>)</span>
+            <span>Matriz Oficial de Coeficiente de Utilización (CIE / Fabricante)</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-1">Tabla estandarizada con las 11 combinaciones de reflectancia para Techo, Paredes y Suelo.</p>
+          <p class="text-xs text-slate-400 mt-1">Límite de reflectancias Techo / Paredes / Suelo y valores del Índice de Local K.</p>
         </div>
 
         <div class="overflow-x-auto">
@@ -325,7 +327,7 @@
             <thead class="bg-slate-900 text-amber-400 font-semibold">
               <tr>
                 <th class="p-2 border border-slate-700" rowspan="3">Índice K</th>
-                <th class="p-2 border border-slate-700" colspan="11">Factores de Reflexión (%) Techo / Paredes / Suelo</th>
+                <th class="p-2 border border-slate-700" colspan="11">Factores de Reflexión (%) Techo / Pared / Suelo</th>
               </tr>
               <tr class="bg-slate-800 text-[11px]">
                 <th class="p-1 border border-slate-700" colspan="2">0.80 / 0.50</th>
@@ -367,7 +369,7 @@
             </h2>
             <p class="text-xs text-slate-400 mt-1">Exigencias mínimas de iluminancia media (E<sub>m</sub> en lux) según recinto y uso.</p>
           </div>
-          <input type="text" id="ric-search" oninput="renderRicTable()" placeholder="Buscar área..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 w-full sm:w-64"/>
+          <input type="text" id="ric-search" oninput="filterRicTable()" placeholder="Buscar área o uso..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 w-full sm:w-64"/>
         </div>
 
         <div class="overflow-x-auto">
@@ -391,35 +393,14 @@
   </main>
 
   <script>
-    // Formateador dinámico: solo muestra decimales cuando sea necesario (máximo 3)
-    function formatNumber(num) {
-      if (num === null || num === undefined || isNaN(num)) return '0';
-      if (Number.isInteger(num)) return num.toString();
-      const rounded = Math.round(num * 1000) / 1000;
-      if (Number.isInteger(rounded)) return rounded.toString();
-      return rounded.toString();
-    }
-
-    // Repositorio de 18 Luminarias y Equipos Reales
+    // Repositorio de Luminarias LED
     const luminaireRepo = [
-      { id: 't8-35', name: 'Luminaria T8 LED Apantallada 35°', phi_L: 10000, n: 1, system: 'direct', desc: 'Equipo industrial apantallado para naves y recintos altos.' },
-      { id: 'panel-6060-40w', name: 'Panel LED 60x60 Embutido 40W', phi_L: 4000, n: 1, system: 'direct', desc: 'Panel ultradelgado modular para oficinas y aulas.' },
-      { id: 'panel-12030-48w', name: 'Panel LED 120x30 Adosado 48W', phi_L: 5200, n: 1, system: 'direct', desc: 'Formato alargado óptimo para pasillos amplios y salas de conferencia.' },
-      { id: 'ufo-100w', name: 'Campana Industrial LED UFO 100W', phi_L: 14000, n: 1, system: 'direct', desc: 'Campana compacta de alta eficiencia para talleres y bodegas.' },
-      { id: 'ufo-150w', name: 'Campana Industrial LED UFO 150W', phi_L: 22000, n: 1, system: 'direct', desc: 'High-Bay estándar para naves industriales de media y gran altura.' },
-      { id: 'ufo-200w', name: 'Campana Industrial LED UFO 200W', phi_L: 30000, n: 1, system: 'direct', desc: 'Potencia industrial elevada para centros logísticos y bodegas de gran volumen.' },
-      { id: 'estanco-1x18w', name: 'Equipo Estanco IP65 1x18W LED', phi_L: 1800, n: 1, system: 'direct', desc: 'Luminaria hermética para zonas de estacionamiento y salas técnicas.' },
-      { id: 'estanco-2x18w', name: 'Equipo Estanco IP65 2x18W LED', phi_L: 3600, n: 2, system: 'direct', desc: 'Hermético doble con pantalla de policarbonato alto impacto.' },
-      { id: 'estanco-2x36w', name: 'Equipo Estanco IP65 2x36W LED', phi_L: 7200, n: 2, system: 'direct', desc: 'Alta potencia hermética para lavaderos, industrias químicas y exterior.' },
-      { id: 'downlight-15w', name: 'Downlight LED Embutido 15W', phi_L: 1500, n: 1, system: 'direct', desc: 'Luminaria circular pequeña para pasillos y servicios higiénicos.' },
-      { id: 'downlight-22w', name: 'Downlight LED Embutido 22W', phi_L: 2200, n: 1, system: 'direct', desc: 'Luminaria estándar embutida para hall de acceso y recepción.' },
-      { id: 'downlight-30w', name: 'Downlight LED Embutido 30W', phi_L: 3100, n: 1, system: 'direct', desc: 'Alto flujo concentrado para salas comerciales y recepciones.' },
-      { id: 'lineal-sus-50w', name: 'Luminaria Lineal Suspendida Directa/Indirecta 50W', phi_L: 5500, n: 1, system: 'indirect', desc: 'Iluminación directa-indirecta con gran confort visual para oficinas.' },
-      { id: 'lineal-arq-36w', name: 'Luminaria Lineal Arquitectónica 36W', phi_L: 3900, n: 1, system: 'direct', desc: 'Perfil continuo de aluminio para diseño interior moderno.' },
-      { id: 'proyector-50w', name: 'Proyector LED de Área 50W IP66', phi_L: 6000, n: 1, system: 'direct', desc: 'Proyector compacto para patios de maniobra y fachadas.' },
-      { id: 'proyector-100w', name: 'Proyector LED de Área 100W IP66', phi_L: 12500, n: 1, system: 'direct', desc: 'Foco de área para recintos deportivos e iluminación de recintos exteriores.' },
-      { id: 'proyector-200w', name: 'Proyector LED de Área 200W IP66', phi_L: 26000, n: 1, system: 'direct', desc: 'Foco de gran alcance para zonas de acopio y grandes explanadas.' },
-      { id: 'spot-rieles-30w', name: 'Spot LED para Riel Electrificado 30W', phi_L: 2800, n: 1, system: 'direct', desc: 'Proyector orientable para acentuar exhibiciones en tiendas y museos.' }
+      { id: 't8-35', name: 'Luminaria T8 LED Apantallada 35°', phi_L: 10000, n: 1, system: 'direct', desc: 'Luminaria lineal industrial apantallada para talleres y recintos altos.' },
+      { id: 'panel-6060', name: 'Panel LED 60x60 Embutido 40W', phi_L: 4000, n: 1, system: 'direct', desc: 'Panel modular óptimo para oficinas generales, aulas y salas de reunión.' },
+      { id: 'ufo-150w', name: 'Campana Industrial High-Bay UFO 150W', phi_L: 22000, n: 1, system: 'direct', desc: 'UFO de alta potencia para galpones, bodegas y naves industriales.' },
+      { id: 'downlight-22w', name: 'Downlight LED Embutido 22W', phi_L: 2200, n: 1, system: 'direct', desc: 'Luminaria circular para pasillos, zonas comunes y recepciones.' },
+      { id: 'estanco-2x18w', name: 'Equipo Estanco IP65 Hermético 2x18W', phi_L: 3600, n: 2, system: 'direct', desc: 'Equipo protegido para ambientes húmedos, intemperie y lavados.' },
+      { id: 'lineal-suspendida', name: 'Luminaria Lineal Suspendida Up/Down 50W', phi_L: 5500, n: 1, system: 'indirect', desc: 'Iluminación directa e indirecta para arquitectura y oficinas ejecutivas.' }
     ];
 
     // Datos RIC N°10
@@ -433,7 +414,7 @@
       { area: "Control de Calidad, Inspección Fina y Microelectrónica", lux: 1000, obs: "Detalles diminutos y alta agudeza visual." }
     ];
 
-    // Matriz CIE Oficial exacta según la imagen suministrada
+    // Matriz CIE para K
     const cieKValues = [0.60, 0.80, 1.00, 1.25, 1.50, 2.00, 2.50, 3.00, 4.00, 5.00];
     const cieMatrix = {
       0.60: [0.40, 0.38, 0.38, 0.37, 0.36, 0.29, 0.27, 0.22, 0.25, 0.21, 0.17],
@@ -457,7 +438,8 @@
         btn.classList.add('border-transparent', 'text-slate-400');
       });
 
-      document.getElementById(`content-${tabId}`).classList.remove('hidden'); const activeBtn = document.getElementById(`tab-${tabId}`);
+      document.getElementById(`content-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-${tabId}`);
       activeBtn.classList.remove('border-transparent', 'text-slate-400');
       activeBtn.classList.add('border-amber-500', 'text-amber-400');
 
@@ -469,6 +451,7 @@
       const pPared = parseFloat(document.getElementById('select-pared').value);
       const pSuelo = parseFloat(document.getElementById('select-suelo').value);
 
+      // Swatches
       const techoColors = { 0.80: '#ffffff', 0.70: '#f3f4f6', 0.50: '#fef08a', 0.30: '#9ca3af', 0.00: '#111827' };
       const paredColors = { 0.50: '#ffffff', 0.30: '#d1d5db', 0.10: '#9f1239', 0.00: '#000000' };
       const sueloColors = { 0.30: '#e5e7eb', 0.20: '#9ca3af', 0.10: '#374151', 0.00: '#000000' };
@@ -485,7 +468,7 @@
       if (!item) return;
 
       document.getElementById('input-lum-name').value = item.name;
-      document.getElementById('input-phi_L').value = item.phi_L;
+      document.getElementById('input-phi_L').value = item.phi_L.toFixed(3);
       document.getElementById('input-n_lamps').value = item.n;
       document.getElementById('input-system').value = item.system;
 
@@ -520,22 +503,18 @@
       const h = H - h_prime - d_prime;
       const S = a * b;
 
+      // Índice K
       let K = (system === 'direct') ? (a * b) / (h * (a + b)) : (3 * a * b) / (2 * h * (a + b));
 
-      // Mapeo exacto a las 11 columnas de la tabla CIE
-      let colIdx = 3; // 0.70 / 0.50 / 0.20 por defecto
-      if (pTecho === 0.80 && pPared === 0.50 && pSuelo === 0.30) colIdx = 0;
-      else if (pTecho === 0.80 && pPared === 0.50 && pSuelo <= 0.20) colIdx = 1;
-      else if (pTecho === 0.70 && pPared === 0.50 && pSuelo === 0.30) colIdx = 2;
-      else if (pTecho === 0.70 && pPared === 0.50 && pSuelo === 0.20) colIdx = 3;
-      else if (pTecho === 0.70 && pPared === 0.50 && pSuelo <= 0.10) colIdx = 4;
-      else if (pTecho === 0.70 && pPared === 0.30) colIdx = 5;
+      // Determinar columna en la tabla CIE (Columna 4 por defecto para 0.70 / 0.50 / 0.20)
+      let colIdx = 4;
+      if (pTecho === 0.70 && pPared === 0.50 && pSuelo === 0.20) colIdx = 4;
+      else if (pTecho === 0.80 && pPared === 0.50) colIdx = 0;
       else if (pTecho === 0.50 && pPared === 0.30) colIdx = 6;
-      else if (pTecho === 0.50 && pPared === 0.10) colIdx = 7;
-      else if (pTecho === 0.30 && pPared === 0.30) colIdx = 8;
-      else if (pTecho === 0.30 && pPared === 0.10) colIdx = 9;
+      else if (pTecho === 0.30) colIdx = 8;
       else if (pTecho === 0.00) colIdx = 10;
 
+      // Buscar K1 y K2 para interpolar
       let k1 = 2.0, k2 = 2.5;
       for (let i = 0; i < cieKValues.length - 1; i++) {
         if (K >= cieKValues[i] && K <= cieKValues[i+1]) {
@@ -585,16 +564,16 @@
         Em_calculado
       };
 
-      // UI con formateador inteligente
-      document.getElementById('res-K').innerText = formatNumber(K);
-      document.getElementById('res-Cu').innerText = formatNumber(Cu);
-      document.getElementById('res-Ntotal').innerText = formatNumber(N_total_grid);
-      document.getElementById('res-grid-desc').innerText = `(${formatNumber(N_ancho)} Ancho × ${formatNumber(N_largo)} Largo)`;
-      document.getElementById('res-Em-calc').innerText = formatNumber(Em_calculado) + ' lux';
+      // UI
+      document.getElementById('res-K').innerText = K.toFixed(3);
+      document.getElementById('res-Cu').innerText = Cu.toFixed(3);
+      document.getElementById('res-Ntotal').innerText = N_total_grid;
+      document.getElementById('res-grid-desc').innerText = `(${N_ancho} Ancho × ${N_largo} Largo)`;
+      document.getElementById('res-Em-calc').innerText = Em_calculado.toFixed(3) + ' lux';
 
-      document.getElementById('res-dancho').innerText = formatNumber(d_ancho) + ' m';
-      document.getElementById('res-dlargo').innerText = formatNumber(d_largo) + ' m';
-      document.getElementById('res-dmax').innerText = formatNumber(d_max_permitida) + ' m';
+      document.getElementById('res-dancho').innerText = d_ancho.toFixed(3) + ' m';
+      document.getElementById('res-dlargo').innerText = d_largo.toFixed(3) + ' m';
+      document.getElementById('res-dmax').innerText = d_max_permitida.toFixed(3) + ' m';
 
       renderRepoCards();
       renderRicTable();
@@ -611,13 +590,307 @@
         {
           num: 1,
           title: "Determinar el nivel de iluminancia media deseado (E<sub>m</sub>)",
-          desc: "Nivel objetivo de lux exigido por la normativa.",
+          desc: "Nivel objetivo de lux exigido por el Pliego Técnico SEC RIC N°10.",
           formula: "E<sub>m</sub> [lux]",
-          replacement: `E<sub>m</sub> = ${formatNumber(c.Em)} lux`, result: `${formatNumber(c.Em)} lux`
+          replacement: `E<sub>m</sub> = ${c.Em.toFixed(3)} lux`,
+          result: `${c.Em.toFixed(3)} lux`
         },
         {
           num: 2,
           title: "Dimensiones del local y alturas geométricas de referencia",
           desc: "Cálculo de la superficie (S), altura a plano de trabajo (d) y altura útil (h).",
           formula: "S = a × b  |  d = H - h'  |  h = H - h' - d'",
-          replacement: `S = ${formatNumber(c.a)} ×${formatNumber(c.
+          replacement: `S = ${c.a.toFixed(3)} × ${c.b.toFixed(3)} = ${c.S.toFixed(3)} m²<br/>` +
+                       `d = ${c.H.toFixed(3)} - ${c.h_prime.toFixed(3)} = ${c.d.toFixed(3)} m<br/>` +
+                       `h = ${c.H.toFixed(3)} - ${c.h_prime.toFixed(3)} - ${c.d_prime.toFixed(3)} = ${c.h.toFixed(3)} m`,
+          result: `S = ${c.S.toFixed(3)} m²  |  h = ${c.h.toFixed(3)} m`
+        },
+        {
+          num: 3,
+          title: "Escoger el tipo de lámpara y fuente luminosa",
+          desc: "Especificación técnica del equipo seleccionado.",
+          formula: "Φ<sub>L</sub> [lm]  |  n [lámparas/luminaria]",
+          replacement: `Flujo unitario (Φ<sub>L</sub>) = ${c.phi_L.toFixed(3)} lm | Lámparas por equipo (n) = ${c.n_lamps}`,
+          result: `Φ<sub>L</sub> = ${c.phi_L.toFixed(3)} lm`
+        },
+        {
+          num: 4,
+          title: "Escoger el sistema de alumbrado",
+          desc: "Distribución fotométrica del flujo emitida por el equipo.",
+          formula: "Sistema = Directo / Semidirecto o Indirecto",
+          replacement: `Sistema = ${c.system === 'direct' ? 'Directo / Semidirecto' : 'Indirecto / Semi-indirecto'}`,
+          result: `${c.system === 'direct' ? 'Directo' : 'Indirecto'}`
+        },
+        {
+          num: 5,
+          title: "Selección de la luminaria",
+          desc: "Modelo físico de la luminaria cargado desde el catálogo.",
+          formula: "Modelo comercial de luminaria",
+          replacement: `Luminaria = ${document.getElementById('input-lum-name').value}`,
+          result: "Luminaria Seleccionada"
+        },
+        {
+          num: 6,
+          title: "Determinar la altura de suspensión de las luminarias",
+          desc: "Límites recomendados de montaje según el sistema escogido.",
+          formula: "h<sub>mín</sub> = (2/3) × h  |  h<sub>ópt</sub> = (4/5) × h",
+          replacement: `h<sub>mín</sub> = (2 / 3) × ${c.h.toFixed(3)} = ${(2/3*c.h).toFixed(3)} m<br/>` +
+                       `h<sub>ópt</sub> = (4 / 5) × ${c.h.toFixed(3)} = ${(4/5*c.h).toFixed(3)} m`,
+          result: `h<sub>ópt</sub> = ${(4/5*c.h).toFixed(3)} m`
+        },
+        {
+          num: 7,
+          title: "Determinar el índice del local (K)",
+          desc: "Relación geométrica proporcional entre área y altura útil.",
+          formula: c.system === 'direct' ? "K = (a × b) / [ h × (a + b) ]" : "K = (3 × a × b) / [ 2 × h × (a + b) ]",
+          replacement: c.system === 'direct' ?
+                       `K = (${c.a.toFixed(3)} × ${c.b.toFixed(3)}) / [ ${c.h.toFixed(3)} × (${c.a.toFixed(3)} + ${c.b.toFixed(3)}) ] = ${c.S.toFixed(3)} / ${(c.h*(c.a+c.b)).toFixed(3)}` :
+                       `K = (3 × ${c.a.toFixed(3)} × ${c.b.toFixed(3)}) / [ 2 × ${c.h.toFixed(3)} × (${c.a.toFixed(3)} + ${c.b.toFixed(3)}) ]`,
+          result: `K = ${c.K.toFixed(3)}`
+        },
+        {
+          num: 8,
+          title: "Factores de reflexión del local",
+          desc: "Porcentajes de reflectancia según color de superficies.",
+          formula: "ρ<sub>Techo</sub> / ρ<sub>Pared</sub> / ρ<sub>Suelo</sub>",
+          replacement: `Techo = ${c.pTecho.toFixed(2)} | Paredes = ${c.pPared.toFixed(2)} | Suelo = ${c.pSuelo.toFixed(2)}`,
+          result: `(${c.pTecho.toFixed(2)} / ${c.pPared.toFixed(2)} / ${c.pSuelo.toFixed(2)})`
+        },
+        {
+          num: 9,
+          title: "Determinar el Coeficiente de Utilización (C<sub>u</sub>) por Interpolación",
+          desc: "Fórmulas exactas de la pendiente (m), intersección (b) e interpolación lineal de K en la tabla CIE.",
+          formula: "m = (C<sub>u2</sub> - C<sub>u1</sub>) / (K<sub>2</sub> - K<sub>1</sub>)<br/>" +
+                   "b = C<sub>u2</sub> - (m × K<sub>2</sub>)<br/>" +
+                   "C<sub>u</sub> = (m × K) + b",
+          replacement: `Valores de tabla: K<sub>1</sub> = ${c.k1.toFixed(3)} (C<sub>u1</sub> = ${c.cu1.toFixed(3)})  |  K<sub>2</sub> = ${c.k2.toFixed(3)} (C<sub>u2</sub> = ${c.cu2.toFixed(3)})<br/>` +
+                       `m = (${c.cu2.toFixed(3)} - ${c.cu1.toFixed(3)}) / (${c.k2.toFixed(3)} - ${c.k1.toFixed(3)}) = ${c.m_slope.toFixed(3)}<br/>` +
+                       `b = ${c.cu2.toFixed(3)} - (${c.m_slope.toFixed(3)} × ${c.k2.toFixed(3)}) = ${c.b_inter.toFixed(3)}<br/>` +
+                       `C<sub>u</sub> = (${c.m_slope.toFixed(3)} × ${c.K.toFixed(3)}) + ${c.b_inter.toFixed(3)}`,
+          result: `C<sub>u</sub> = ${c.Cu.toFixed(3)}`
+        },
+        {
+          num: 10,
+          title: "Determinar el Factor de Mantenimiento (C<sub>m</sub>)",
+          desc: "Factor de depreciación por acumulación de polvo y envejecimiento.",
+          formula: "C<sub>m</sub> (0.800 Limpio / 0.600 Sucio)",
+          replacement: `C<sub>m</sub> seleccionado = ${c.Cm.toFixed(3)}`,
+          result: `C<sub>m</sub> = ${c.Cm.toFixed(3)}`
+        },
+        {
+          num: 11,
+          title: "Cálculo del flujo luminoso total requerido (Φ<sub>T</sub>)",
+          desc: "Flujo luminoso total que deben suministrar todas las luminarias.",
+          formula: "Φ<sub>T</sub> = (E<sub>m</sub> × S) / (C<sub>u</sub> × C<sub>m</sub>)",
+          replacement: `Φ<sub>T</sub> = (${c.Em.toFixed(3)} × ${c.S.toFixed(3)}) / (${c.Cu.toFixed(3)} × ${c.Cm.toFixed(3)}) = ${(c.Em*c.S).toFixed(3)} / ${(c.Cu*c.Cm).toFixed(3)}`,
+          result: `Φ<sub>T</sub> = ${c.phi_T.toFixed(3)} lm`
+        },
+        {
+          num: 12,
+          title: "Número teórico de luminarias a utilizar (N)",
+          desc: "Cálculo teórico inicial de unidades requeridas y redondeo.",
+          formula: "N = Φ<sub>T</sub> / (n × Φ<sub>L</sub>)",
+          replacement: `N = ${c.phi_T.toFixed(3)} / (${c.n_lamps} × ${c.phi_L.toFixed(3)}) = ${c.N_exacto.toFixed(3)} unidades`,
+          result: `N<sub>teórico</sub> = ${c.N_redondeado} unidades`
+        },
+        {
+          num: 13,
+          title: "Proyectar la ubicación y grilla de luminarias en planta",
+          desc: "Distribución rectangular simétrica y verificación de distancia máxima permitida.",
+          formula: "N<sub>ancho</sub> = ⌈ √[ (N × a) / b ] ⌉<br/>" +
+                   "N<sub>largo</sub> = ⌈ N<sub>ancho</sub> × (b / a) ⌉<br/>" +
+                   "d<sub>máx</sub> = 1.6 × h",
+          replacement: `N<sub>ancho</sub> = ⌈ √[ (${c.N_redondeado} × ${c.a.toFixed(3)}) / ${c.b.toFixed(3)} ] ⌉ = ⌈ ${c.N_ancho_exact.toFixed(3)} ⌉ = ${c.N_ancho}<br/>` +
+                       `N<sub>largo</sub> = ⌈ ${c.N_ancho_exact.toFixed(3)} × (${c.b.toFixed(3)} / ${c.a.toFixed(3)}) ⌉ = ⌈ ${c.N_largo_exact.toFixed(3)} ⌉ = ${c.N_largo}<br/>` +
+                       `Separación Ancho (d<sub>ancho</sub>) = ${c.a.toFixed(3)} / ${c.N_ancho} = ${c.d_ancho.toFixed(3)} m<br/>` +
+                       `Separación Largo (d<sub>largo</sub>) = ${c.b.toFixed(3)} / ${c.N_largo} = ${c.d_largo.toFixed(3)} m<br/>` +
+                       `Distancia Máxima (d<sub>máx</sub>) = 1.6 × ${c.h.toFixed(3)} = ${c.d_max_permitida.toFixed(3)} m`,
+          result: `Grilla = ${c.N_ancho} × ${c.N_largo} = ${c.N_total_grid} luminarias`
+        },
+        {
+          num: 14,
+          title: "Comprobación final de la iluminancia real alcanzada",
+          desc: "Verificación del cumplimiento de la iluminancia exigida por tabla.",
+          formula: "E<sub>m_real</sub> = (N<sub>total</sub> × n × Φ<sub>L</sub> × C<sub>u</sub> × C<sub>m</sub>) / S ≥ E<sub>m_requerido</sub>",
+          replacement: `E<sub>m_real</sub> = (${c.N_total_grid} × ${c.n_lamps} × ${c.phi_L.toFixed(3)} × ${c.Cu.toFixed(3)} × ${c.Cm.toFixed(3)}) / ${c.S.toFixed(3)}<br/>` +
+                       `E<sub>m_real</sub> = ${(c.N_total_grid * c.n_lamps * c.phi_L * c.Cu * c.Cm).toFixed(3)} / ${c.S.toFixed(3)}`,
+          result: `E<sub>m_real</sub> = ${c.Em_calculado.toFixed(3)} lux (${c.Em_calculado >= c.Em ? 'CUMPLE' : 'NO CUMPLE'})`
+        }
+      ];
+
+      container.innerHTML = steps.map(s => `
+        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <span class="bg-amber-500/20 text-amber-400 font-bold px-2.5 py-1 rounded text-xs font-mono-code border border-amber-500/30">Paso ${s.num}</span>
+            <h3 class="font-semibold text-sm text-slate-100 flex-grow ml-3">${s.title}</h3>
+          </div>
+          <p class="text-xs text-slate-400">${s.desc}</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-950 p-3 rounded border border-slate-800">
+              <span class="text-amber-400 font-semibold block mb-1">📐 Fórmula Base</span>
+              <div class="font-mono-code text-slate-200">${s.formula}</div>
+            </div>
+            <div class="bg-slate-950 p-3 rounded border border-slate-800">
+              <span class="text-blue-400 font-semibold block mb-1">🔢 Reemplazo de Valores</span>
+              <div class="font-mono-code text-slate-200">${s.replacement}</div>
+            </div>
+            <div class="bg-slate-950 p-3 rounded border border-slate-800 flex flex-col justify-between">
+              <span class="text-emerald-400 font-semibold block mb-1">✅ Resultado</span>
+              <div class="font-mono-code text-emerald-400 font-bold text-sm">${s.result}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderRepoCards() {
+      const q = (document.getElementById('repo-search')?.value || '').toLowerCase();
+      const container = document.getElementById('repo-cards-container');
+      if (!container) return;
+
+      container.innerHTML = luminaireRepo
+        .filter(l => l.name.toLowerCase().includes(q) || l.desc.toLowerCase().includes(q))
+        .map(l => `
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">${l.system.toUpperCase()}</span>
+                <span class="text-xs text-slate-400 font-mono-code">${l.phi_L.toFixed(3)} lm</span>
+              </div>
+              <h3 class="font-bold text-sm text-white">${l.name}</h3>
+              <p class="text-xs text-slate-400 mt-1">${l.desc}</p>
+            </div>
+            <button onclick="selectLuminaire('${l.id}')" class="w-full bg-slate-800 hover:bg-amber-500 hover:text-slate-900 text-amber-400 font-semibold text-xs py-2 rounded-lg border border-slate-700 transition">
+              Cargar esta Luminaria
+            </button>
+          </div>
+        `).join('');
+    }
+
+    function renderRicTable() {
+      const q = (document.getElementById('ric-search')?.value || '').toLowerCase();
+      const tbody = document.getElementById('ric-table-body');
+      if (!tbody) return;
+
+      tbody.innerHTML = ricData
+        .filter(r => r.area.toLowerCase().includes(q) || r.obs.toLowerCase().includes(q))
+        .map(r => `
+          <tr class="hover:bg-slate-700/30 transition">
+            <td class="p-3 font-medium text-white">${r.area}</td>
+            <td class="p-3 text-center font-bold text-amber-400 font-mono-code">${r.lux.toFixed(3)} lux</td>
+            <td class="p-3 text-slate-400">${r.obs}</td>
+            <td class="p-3 text-center">
+              <button onclick="applyRicLux(${r.lux})" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/40 px-2.5 py-1 rounded text-xs transition">
+                Usar en Cálculo
+              </button>
+            </td>
+          </tr>
+        `).join('');
+    }
+
+    function renderCieTable() {
+      const tbody = document.getElementById('cie-table-body');
+      if (!tbody) return;
+
+      tbody.innerHTML = cieKValues.map(kVal => {
+        const row = cieMatrix[kVal];
+        const isSelectedK = (kVal === state.k1 || kVal === state.k2);
+        return `
+          <tr class="${isSelectedK ? 'bg-amber-500/10 font-bold text-amber-300' : 'hover:bg-slate-700/30'}">
+            <td class="p-2 border border-slate-700 font-bold text-amber-400">${kVal.toFixed(2)}</td>
+            ${row.map((val, idx) => `
+              <td class="p-2 border border-slate-700 ${idx === state.colIdx && isSelectedK ? 'bg-amber-500/30 text-white border-amber-400' : ''}">
+                ${val.toFixed(3)}
+              </td>
+            `).join('')}
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function draw2DCanvas() {
+      const canvas = document.getElementById('canvas2d');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const hCanvas = canvas.height;
+
+      ctx.clearRect(0, 0, w, hCanvas);
+
+      const margin = 40;
+      const roomA = state.a || 8;
+      const roomB = state.b || 17;
+
+      const scaleX = (w - 2 * margin) / roomB;
+      const scaleY = (hCanvas - 2 * margin) / roomA;
+      const scale = Math.min(scaleX, scaleY);
+
+      const roomW = roomB * scale;
+      const roomH = roomA * scale;
+
+      const startX = (w - roomW) / 2;
+      const startY = (hCanvas - roomH) / 2;
+
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(startX, startY, roomW, roomH);
+
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(startX, startY, roomW, roomH);
+
+      const cols = state.N_largo || 7;
+      const rows = state.N_ancho || 3;
+
+      const dx = roomW / cols;
+      const dy = roomH / rows;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = startX + (c + 0.5) * dx;
+          const y = startY + (r + 0.5) * dy;
+
+          const gradient = ctx.createRadialGradient(x, y, 2, x, y, dx * 0.85);
+          gradient.addColorStop(0, 'rgba(251, 191, 36, 0.45)');
+          gradient.addColorStop(0.6, 'rgba(251, 191, 36, 0.15)');
+          gradient.addColorStop(1, 'rgba(251, 191, 36, 0)');
+
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(x, y, dx * 0.85, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#fbbf24';
+          ctx.beginPath();
+          ctx.arc(x, y, 4, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(x, y, 7, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '11px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`Largo (b) = ${roomB.toFixed(3)} m`, startX + roomW / 2, startY - 12);
+
+      ctx.save();
+      ctx.translate(startX - 15, startY + roomH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(`Ancho (a) = ${roomA.toFixed(3)} m`, 0, 0);
+      ctx.restore();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      onColorChange();
+    });
+
+    window.addEventListener('resize', () => {
+      draw2DCanvas();
+    });
+  </script>
+</body>
+</html>
